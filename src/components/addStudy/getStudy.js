@@ -13,25 +13,26 @@ const StudyTable = () => {
   const [studyMaterials, setStudyMaterials] = useState([]);
 
   useEffect(() => {
-    // Fetch data from the API
-    fetch(`${process.env.REACT_APP_BACKEND_URL}/api/study/study`)
-      .then(response => response.json())
-      .then(data => {
-        // Update the state with the fetched data
+    const fetchData = async () => {
+      try {
+        const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/study/study`);
+        const data = await response.json();
         setStudyMaterials(data);
-      })
-      .catch(error => console.error('Error fetching data:', error));
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData();
   }, []);
 
   const handleDelete = async (studyMaterialId) => {
     try {
-      // Send a DELETE request to the API endpoint with the study material ID
       const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/study/delete/${studyMaterialId}`, {
         method: 'DELETE',
       });
 
       if (response.ok) {
-        // Update the study materials state after successful deletion
         setStudyMaterials((prevStudyMaterials) =>
           prevStudyMaterials.filter((studyMaterial) => studyMaterial.id !== studyMaterialId)
         );
@@ -56,10 +57,10 @@ const StudyTable = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center bg-gray-200  min-h-screen">
+    <div className="flex flex-col items-center justify-center bg-gray-200 min-h-screen">
       <ToastContainer />
-      <h1 className='text-3xl  font-bold text-center sm:mt-0 sm:ml-200'>Our School Study Materials</h1>
-      <h1 className='text-2xl font-bold'>Study Material Cannot delete from mobile</h1>
+      <h1 className="text-3xl font-bold text-center sm:mt-0 sm:ml-200">Our School Study Materials</h1>
+      <h1 className="text-2xl font-bold">Study Material Cannot delete from mobile</h1>
       <div className="overflow-x-auto w-full sm:ml-120">
         <table className="md:ml-[260px] md:w-[80%] bg-white shadow-md rounded-xl">
           <thead>
@@ -73,8 +74,8 @@ const StudyTable = () => {
           <tbody className="text-blue-gray-900">
             {studyMaterials.map(studyMaterial => (
               <tr key={studyMaterial.id} className="border-b border-blue-gray-200">
-                <td className="py-4 px-4">{studyMaterial.name}</td>
-                <td className="py-3 px-4">{studyMaterial.topic}</td>
+                <td className="py-4 px-4">{truncateText(studyMaterial.name, 20)}</td>
+                <td className="py-3 px-4">{truncateText(studyMaterial.topic, 20)}</td>
                 <td className="py-3 px-4">{studyMaterial.link}</td>
                 <td className="py-3 px-4">
                   <button

@@ -35,14 +35,7 @@ function App() {
     localStorage.setItem("isLogin", "true");
   };
 
-  const handleLogout = () => {
-    // Your logout logic here
-    // For example, you might clear the authentication token
-    // and set isLoggedIn to false.
-    setIsLoggedIn(false);
-    // Clear the login state from local storage
-    localStorage.removeItem("isLogin");
-  };
+ 
 
   return (
     <div className="App">

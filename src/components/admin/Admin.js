@@ -11,10 +11,6 @@ import HeaderStats from "../Header/HeaderStats.js";
 // views
 
 import Dashboard from "../admin/Dashboard.js";
-import footer from "./footer.js";
-// import Maps from "../admin/Maps.js";
-// import Settings from "../admin/Settings.js";
-// import Tables from "../admin/Tables.js";
 
 export default function Admin() {
   return (
@@ -33,7 +29,7 @@ export default function Admin() {
             <Route path="/admin/tables" exact component={Tables} />
             <Redirect from="/admin" to="/admin/dashboard" /> */}
           </Routes>
-          <footer/>
+          
         </div>
       </div>
     </>
