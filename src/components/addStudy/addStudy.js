@@ -8,6 +8,7 @@ import Dropzone from 'react-dropzone';
 const EventForm = () => {
   const [name, setName ]= useState('');
   const [topic, setTopic ]= useState('');
+  const [term, setTerm]= useState('');
   const [description, setDescription] = useState('');
   const [link, setLink]= useState('');
   const [file, setFile] = useState(null);
@@ -25,6 +26,7 @@ const EventForm = () => {
     formData.append('topic', topic);
     formData.append('link', link);
     formData.append('file', file);
+    formData.append('term', term);
 
     try {
       const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/study/add`,formData, {
@@ -49,6 +51,8 @@ const EventForm = () => {
       }
 
       console.log('Event added successfully:', response.data);
+      console.log('Event added successfully:', term);
+      
       // Optionally, you can redirect the user or perform other actions here
     } catch (error) {
       console.error('Error adding event:', error);
@@ -82,6 +86,7 @@ const EventForm = () => {
             <label
               htmlFor="title"
               className="block text-sm font-semibold leading-6 text-gray-900"
+              placeholder="Enter your  Book Name"
             >
               Book Name:
             </label>
@@ -136,6 +141,7 @@ const EventForm = () => {
                 className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
               />
             </div>
+            
             <div>
             <div>
             <label
@@ -150,12 +156,13 @@ const EventForm = () => {
                  id="link"
                  value={link}
                  onChange={(e) => setLink(e.target.value)}
+                 placeholder="Enter website Link here"
                  required
-
                 className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
               />
             </div>
           </div>
+          
           <div>
             <label
               htmlFor="title"
@@ -173,6 +180,33 @@ const EventForm = () => {
 
                 className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
               />
+            </div>
+          </div>
+          
+          <div>
+            <label
+              htmlFor="title"
+              className="block text-sm font-semibold leading-6 text-gray-900"
+            >
+              Choose Class:  write number only
+            </label>
+            <div className="mt-2.5">
+
+            <input
+          id="term"
+          type="number"
+          value={term}
+          onChange={(e) => setTerm(e.target.value)}
+          className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+        />
+          
+                 {/* type="text"
+                 id="topic"
+                 value={topic}
+                 onChange={(e) => setTopic(e.target.value)}
+                 required
+
+                /> */}
             </div>
           </div>
             </div>
