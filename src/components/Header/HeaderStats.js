@@ -1,11 +1,11 @@
 
-import React, { useState, useEffect } from "react";
+import React, {  useEffect } from "react";
 // components
 
 import CardStats from "../Cards/CardStats.js";
 
 export default function HeaderStats() {
-  const [totalEvents, setTotalEvents] = useState(0);
+  
 
   useEffect(() => {
     // Fetch data from the API
@@ -13,13 +13,11 @@ export default function HeaderStats() {
       .then((response) => response.json())
       .then((data) => {
         // Assuming the API response has an array of events
-        const events = data && data.events ? data.events : [];
+
 
         // Calculate the total number of events
-        const totalEventsCount = events.length;
 
-        // Set the total count
-        setTotalEvents(totalEventsCount);
+
       })
       .catch((error) => console.error("Error fetching event data:", error));
   }, []); // Empty dependency array ensures that this effect runs once when the component mounts
@@ -35,7 +33,7 @@ export default function HeaderStats() {
               <div className="w-full lg:w-6/12 xl:w-3/12 px-4">
                 <CardStats
                   statSubtitle="Total Event"
-                  statTitle={totalEvents !== null ? totalEvents : "Loading..."}
+                  statTitle= "32"
                   statArrow="up"
                   statPercent="3.48"
                   statPercentColor="text-emerald-500"
@@ -58,7 +56,7 @@ export default function HeaderStats() {
               </div>
               <div className="w-full lg:w-6/12 xl:w-3/12 px-4">
                 <CardStats
-                  statSubtitle="SALES"
+                  statSubtitle="Total Visiter"
                   statTitle="924"
                   statArrow="down"
                   statPercent="1.10"
@@ -77,7 +75,7 @@ export default function HeaderStats() {
                   statPercentColor="text-emerald-500"
                   statDescripiron="Since last month"
                   statIconName="fas fa-percent"
-                  statIconColor="bg-lightBlue-500"
+                  statIconColor="bg-Blue-500"
                 />
               </div>
             </div>
